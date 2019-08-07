@@ -1,9 +1,15 @@
 import React from "react";
+import { ThemeProvider as EmotionThemeProvider } from "emotion-theming";
+import { ThemeProvider as StyledComponentThemeProvider } from "styled-components";
 import Chart from "./chart";
 import CssModuleChart from "./css-modules";
 import StyledComponentsChart from "./styled-components";
 import EmotionChart from "./emotion";
 import "./App.css";
+
+const theme = {
+  base: "black"
+};
 
 function App() {
   return (
@@ -29,21 +35,33 @@ const Styled = styled(Chart)\`
   text {
     fill: pink;
   }
+
+  /* Themes can be integrated as such */
+  rect {
+    fill: \${props => props.theme.base};
+  }
 \`;
         `}
         </pre>
-        <StyledComponentsChart />
+        <StyledComponentThemeProvider theme={theme}>
+          <StyledComponentsChart />
+        </StyledComponentThemeProvider>
 
         <h2>Emotion</h2>
         <p>These use a combination of template tags and custom attributes:</p>
         <pre style={{ textAlign: "left" }}>
           {`
   <Chart
-    css={css\`
-      text {
-        fill: green;
-      }
-    \`}
+    css={props =>
+      css\`
+        text {
+          fill: green;
+        }
+        rect {
+          fill: \${props.base}; /* This comes from top-level theme */
+        }
+      \`
+    }
     margin={{ left: 70, right: 70, top: 20, bottom: 60 }}
     width={window.innerWidth}
     height={window.innerHeight / 2}
@@ -52,7 +70,9 @@ const Styled = styled(Chart)\`
   />
 `}
         </pre>
-        <EmotionChart />
+        <EmotionThemeProvider theme={theme}>
+          <EmotionChart />
+        </EmotionThemeProvider>
       </header>
     </div>
   );

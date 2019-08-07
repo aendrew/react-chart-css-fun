@@ -11,6 +11,7 @@ import { AxisLeft, AxisRight, AxisBottom } from "@vx/axis";
 import { Area, LinePath, Line } from "@vx/shape";
 import { scaleTime, scaleLinear } from "@vx/scale";
 import { extent } from "d3-array";
+import styles from "../css-modules/styles.module.css";
 
 const data = genDateValue(20);
 
@@ -32,6 +33,7 @@ function numTicksForWidth(width) {
 }
 
 export default ({
+  cssMod = false,
   className,
   width,
   height,
@@ -59,7 +61,15 @@ export default ({
 
   return (
     <svg width={width} height={height} className={className}>
-      <rect x={0} y={0} width={width} height={height} fill="#FFEFE1" rx={14} />
+      <rect
+        className={cssMod ? styles["chart-background"] : ""}
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        fill="#FFEFE1"
+        rx={14}
+      />
       <Group top={margin.top} left={margin.left}>
         <Area
           data={data}

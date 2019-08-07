@@ -10,6 +10,10 @@ const Styled = styled(Chart)`
   text {
     fill: pink;
   }
+
+  rect {
+    fill: ${props => props.theme.base};
+  }
 `;
 
 export default ({ ...props }) => (

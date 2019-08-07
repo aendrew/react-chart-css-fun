@@ -1,3 +1,7 @@
 .chart text {
   fill: yellow;
 }
+
+.chart-background {
+  composes: dark from "./theme.module.css";
+}

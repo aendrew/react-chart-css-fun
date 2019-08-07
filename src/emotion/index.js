@@ -9,11 +9,16 @@ import { css, jsx } from "@emotion/core";
 
 export default ({ ...props }) => (
   <Chart
-    css={css`
-      text {
-        fill: green;
-      }
-    `}
+    css={props =>
+      css`
+        text {
+          fill: green;
+        }
+        rect {
+          fill: ${props.base}; /* This comes from top-level theme */
+        }
+      `
+    }
     margin={{ left: 70, right: 70, top: 20, bottom: 60 }}
     width={window.innerWidth}
     height={window.innerHeight / 2}

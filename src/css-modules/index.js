@@ -8,6 +8,7 @@ import styles from "./styles.module.css";
 
 export default ({ ...props }) => (
   <Chart
+    cssMod
     margin={{ left: 70, right: 70, top: 20, bottom: 60 }}
     width={window.innerWidth}
     height={window.innerHeight / 2}
